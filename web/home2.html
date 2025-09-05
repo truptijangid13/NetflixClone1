@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    .header {
+      background: url('background.jpg') no-repeat center center/cover;
+      padding: 100px 20px 20px;
+      text-align: center;
+    }
+    .header input[type="email"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      max-width: 80%;
+    }
+    .header button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .trending {
+      padding: 20px;
+    }
+    .trending h2 {
+      margin-bottom: 20px;
+    }
+    .cards {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+    }
+    .card {
+      position: relative;
+      flex: 0 0 auto;
+      width: 200px;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 5px;
+    }
+    .card-number {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 5px 10px;
+      font-size: 24px;
+      border-radius: 5px;
+    }
+    .more-reasons {
+      padding: 20px;
+      background-color: #111;
+      margin-top: 20px;
+    }
+    .reason-card {
+      background: linear-gradient(145deg, #1c1c1e, #2c2c2e);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 10px 0;
+      position: relative;
+    }
+    .reason-icon {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+    }
+    .get-started {
+      text-align: center;
+      margin: 20px;
+    }
+    .get-started button {
+      background-color: red;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>or restart your membership.</h2>
+    <input type="email" placeholder="Email address">
+    <button>Get Started</button>
+  </div>
+
+  <div class="trending">
+    <h2>Trending Now</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="card-number">1</span>
+        <img src="chiava.jpg" alt="CHHAVA">
+      </div>
+      <div class="card">
+        <span class="card-number">2</span>
+        <img src="court.jpg" alt="COURT">
+      </div>
+    </div>
+  </div>
+
+  <div class="more-reasons">
+    <h2>More reasons to join</h2>
+
+    <div class="reason-card">
+      <h3>Enjoy on your TV</h3>
+      <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
+      <img src="tv-icon.png" alt="TV Icon" class="reason-icon">
+    </div>
+
+    <div class="reason-card">
+      <h3>Download your shows to watch offline</h3>
+      <p>Save your favourites easily and always have something to watch.</p>
+      <img src="download-icon.png" alt="Download Icon" class="reason-icon">
+    </div>
+
+    <div class="reason-card">
+      <h3>Watch everywhere</h3>
+      <p>Stream unlimited movies and TV shows on your phone, tablet, laptop and TV.</p>
+      <img src="device-icon.png" alt="Devices Icon" class="reason-icon">
+    </div>
+  </div>
+
+  <div class="get-started">
+    <button>Get Started</button>
+  </div>
+</body>
+</html>

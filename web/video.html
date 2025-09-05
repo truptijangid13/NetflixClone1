@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Floret – Watch Now</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ---- reset & base ---- */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Roboto',sans-serif;background:#141414;color:#fff;overflow-x:hidden}
+h1{padding:30px 40px 10px;font-size:2rem}
+
+/* ---- navbar ---- */
+.navbar{display:flex;align-items:center;padding:10px 30px;background:#111}
+.logo img{height:40px}
+.nav-links{display:flex;gap:25px;margin-left:30px}
+.nav-links a{color:#fff;text-decoration:none;font-weight:500;font-size:1rem;transition:color .3s}
+.nav-links a:hover{color:#e50914}
+.search-container{margin-left:auto;position:relative;display:flex;align-items:center}
+.search-container input{width:0;opacity:0;border:none;padding:8px 12px;background:rgba(255,255,255,.1);color:#fff;border-radius:4px;font-size:16px;transition:width .4s ease}
+.search-container i{color:#fff;font-size:20px;margin-left:10px;cursor:pointer}
+.search-container:hover input,
+.search-container input:focus{width:200px;opacity:1;background:rgba(255,255,255,.15)}
+
+/* ---- hero ---- */
+.hero{position:relative;width:100%;height:90vh;overflow:hidden}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(60%)}
+.hero-overlay{position:absolute;top:30%;left:5%;z-index:2;max-width:600px}
+.hero-overlay h1{padding:0;margin-bottom:10px;font-size:3rem;font-weight:700}
+.hero-description{font-size:1.2rem;margin-bottom:20px;color:#ccc}
+.hero-buttons .btn{background:rgba(51,51,51,.7);border:none;color:#fff;padding:10px 20px;margin-right:10px;font-size:1rem;border-radius:4px;cursor:pointer;transition:background .3s}
+.hero-buttons .btn:hover{background:#e50914}
+
+/* ---- horizontal row ---- */
+.category-row{display:flex;gap:20px;padding:20px 40px 40px;overflow-x:auto;scroll-snap-type:x mandatory}
+.category-row::-webkit-scrollbar{height:8px}
+.category-row::-webkit-scrollbar-thumb{background:#444;border-radius:10px}
+
+/* ---- card ---- */
+.card{position:relative;min-width:300px;height:170px;border-radius:8px;overflow:hidden;background:#222;flex-shrink:0;scroll-snap-align:start;cursor:pointer;transition:transform .3s}
+.card:hover{transform:scale(1.05)}
+.video-container{position:relative;width:100%;height:100%}
+.video-cover,.video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video{filter:brightness(40%);opacity:0;transition:opacity .5s}
+.card:hover .video{opacity:1}
+.custom-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;background:rgba(0,0,0,.5);color:#fff;border:none;padding:10px;border-radius:50%;cursor:pointer;display:none;z-index:3}
+.card:hover .custom-play-btn{display:block}
+
+/* ---- overlay & actions ---- */
+.card-overlay{position:absolute;bottom:0;left:0;width:100%;padding:10px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);z-index:2}
+.video-actions{display:flex;gap:10px;opacity:0;transition:opacity .3s}
+.card:hover .video-actions{opacity:1}
+.action-btn{background:rgba(0,0,0,.6);border:none;padding:10px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .3s,transform .2s}
+.action-btn:hover{background:rgba(229,9,20,.9);transform:scale(1.1)}
+.action-btn svg{fill:#fff}
+</style>
+</head>
+
+<body>
+
+<!-- ░░ NAVBAR ░░ -->
+<header class="navbar">
+  <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix"></div>
+<nav class="nav-links">
+  <a href="video.html">Movies</a>
+  <a href="LOST.html">TV Shows</a>
+  <a href="LOST.html">New & Popular</a>
+  <a href="mylist.html">My List</a>
+</nav>
+
+  <div class="search-container">
+    <input type="text" placeholder="Search for Titles...">
+    <i class="fa fa-search"></i>
+  </div>
+  
+  
+</header>
+
+<!-- ░░ HERO ░░ -->
+<section class="hero">
+  <video  id="heroTrailer" autoplay muted loop class="hero-video">
+    <source src="videos/TearSmith.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay">
+    <h1>TearSmith</h1>
+    <p class="hero-description">Adopted together after a tough childhood in an orphanage, Nica and Rigel realise unexpected but irresistible feelings pull them together.</p>
+    <div class="hero-buttons">
+      <button id="heroPlay" class="btn">▶ Play</button>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ CONTINUE WATCHING ░░ -->
+<h1>Continue Watching</h1>
+<div class="category-row">
+  <!-- CARD 1 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="JIGRA_1.jpeg" class="video-cover" alt="Jigra">
+      <video src="videos/jigra.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+       <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="PANIPAT.jpeg" class="video-cover" alt="Panipat">
+      <video src="videos/Panipat.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+        <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="THRUWIND_1.jpeg" class="video-cover" alt="Through My Window">
+      <video src="videos/ThruMyWind.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+        <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░ TRENDING NOW ░░ -->
+<h1>Trending Now</h1>
+<div class="category-row">
+  <!-- CARD 1 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="tearSmith_2.jpg" class="video-cover" alt="TearSmith">
+      <video src="videos/TearSmith.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+         <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="S-Killer_1.jpeg" class="video-cover" alt="Mrs Serial Killer">
+      <video src="videos/Mrs.SerKiller.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+        <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░ TOP PICKS FOR YOU ░░ -->
+<h1>Top Picks for You</h1>
+<div class="category-row">
+  <!-- CARD 1 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="skyIsPink_1.jpeg" class="video-cover" alt="The Sky Is Pink">
+      <video src="videos/skyIsPink.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+        <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="LailaMjnu_2.jpeg" class="video-cover" alt="Laila Majnu">
+      <video src="videos/LailaMajnu.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+        <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="Ball_1.jpeg" class="video-cover" alt="Ballerina">
+      <video src="videos/Ballerina.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+        <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ░░ NEW RELEASES ░░ -->
+<h1>New Releases</h1>
+<div class="category-row">
+  <!-- CARD 1 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="FITOOR_1.jpeg" class="video-cover" alt="Fitoor">
+      <video src="videos/Fitoor.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+         <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="ALONGforRIDE.jpeg" class="video-cover" alt="Along for the Ride">
+      <video src="videos/Along for the Ride.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+       <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card">
+    <div class="video-container">
+      <img src="KHOgayeHAM_1.jpeg" class="video-cover" alt="Kho Gaye Hum Kahan">
+      <video src="videos/khoGAYEham.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+         <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Full‑screen trailer play of HERO SECTION */
+document.getElementById('heroPlay').addEventListener('click', () => {
+  const video = document.getElementById('heroTrailer');
+
+  // Unmute & restart from beginning
+  video.pause(); //pause the vid.
+  video.currentTime = 0; //set it to back(0 sec).
+  video.muted = false; //unmute the vid.
+
+  // Request full‑screen (cross‑browser)
+  const requestFS =
+      video.requestFullscreen    ||
+      video.webkitRequestFullscreen ||
+      video.mozRequestFullScreen ||
+      video.msRequestFullscreen;
+
+  if (requestFS) {
+    requestFS.call(video);
+  }
+
+  // Play when full‑screen starts (some browsers need a slight delay)
+  const playWhenReady = () => {
+    video.play(); //play the vid.
+    
+    //no matter if the user is on Chrome, Firefox, or Safari, your function will still be called when entering/exiting fullscreen.
+    document.removeEventListener('fullscreenchange', playWhenReady); //it removes EVENT LISTENER so it won’t keep running every time I toggle fullscreen again.
+//This is important because I only want to trigger video.play() once, not on every fullscreen event.
+    document.removeEventListener('webkitfullscreenchange', playWhenReady);
+  };
+  document.addEventListener('fullscreenchange', playWhenReady); //This tells the browser: “Whenever fullscreen mode changes, run playWhenReady.”
+  document.addEventListener('webkitfullscreenchange', playWhenReady);
+});
+
+  // Target all cards (excluding the hero section)
+  const cards = document.querySelectorAll('.watch-card, .card');
+
+  cards.forEach(card => {
+    const video = card.querySelector('video');
+
+    // Hover - play with sound and zoom
+    card.addEventListener('mouseenter', () => {
+      video.muted = false;
+      video.play();
+      card.style.zIndex = "10";
+      card.style.transform = "scale(1.2)";
+    });
+
+    // Mouse leave - pause and reset
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0; //Resets the video playback position back to the beginning (0 seconds).
+      video.muted = true; //The video plays silently on hover until the user explicitly interacts (clicks Play button, etc.).
+      card.style.zIndex = "1"; //When hovering, i've increased zIndex (e.g., zIndex = "10") so the card is “on top” of neighbors while zoomed in.
+        //When the mouse leaves, this line sends it back down (zIndex = "1"), restoring normal stacking in the layout.
+     card.style.transform = "scale(1)"; //On mouseleave, setting the poped out CARD back to "scale(1)" shrinks it to its normal size.
+    });
+
+// Double click - Fullscreen play
+card.addEventListener('dblclick', () => {
+      if (video.requestFullscreen) {  // Standard fullscreen API
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) { // For Safari (WebKit)
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { // For old Microsoft browsers (IE/Edge)
+        video.msRequestFullscreen();
+      }
+      video.play(); // Start or continue playing in fullscreen
+    });
+  });
+
+// Hero play button - play fullscreen
+  const playButton = document.querySelector('.play-btn');
+  const heroVideo = document.querySelector('.hero-video');
+
+  playButton.addEventListener('click', () => {
+    if (heroVideo.requestFullscreen) {
+      heroVideo.requestFullscreen();
+    } else if (heroVideo.webkitRequestFullscreen) {
+      heroVideo.webkitRequestFullscreen();
+    } else if (heroVideo.msRequestFullscreen) {
+      heroVideo.msRequestFullscreen();
+    }
+    heroVideo.play();
+  });
+
+//JavaScript for Button Logic
+  document.querySelectorAll('.like-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Stop bubbling
+    alert("You liked this video! ❤️");
+  });
+});
+
+document.querySelectorAll('.wishlist-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    alert("Added to your wishlist! ➕");
+  });
+});
+ 
+//This makes every play button open its own video in fullscreen and play it, 
+//while preventing clicks from interfering with parent elements.
+document.querySelectorAll('.video-actions .play-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const video = btn.closest('.card, .watch-card').querySelector('video');
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
+    }
+    video.play();
+  });
+});
+
+//
+const movieCards = document.querySelectorAll('.movie-card');
+  movieCards.forEach(card => { //Runs code for each card individually.
+    const video = card.querySelector('.movie-video');
+    const cover = card.querySelector('.cover-image');
+
+    card.addEventListener('mouseenter', () => {
+      cover.style.opacity = 0; //Makes the cover transparent (invisible).
+      video.play();
+    });
+
+    card.addEventListener('mouseleave', () => {
+      cover.style.opacity = 1; //Cover becomes visible again.
+      video.pause();
+      video.currentTime = 0; //Video is reset to the beginning (so that next hover always starts from start).
+    });
+  });
+ 
+  document.querySelectorAll('.watch-card video').forEach(video => {
+    video.addEventListener('mouseenter', () => {
+      video.currentTime = 0; //Always start from beginning.
+      video.play(); //Video starts playing on hover.
+    });
+
+    video.addEventListener('mouseleave', () => {
+      video.pause(); //Stops playback.
+      video.currentTime = 0; //Reset to start position.
+    });
+  });
+  
+//for search bar
+const searchInput = document.getElementById("searchInput"); //Grabs the <input> where the user types their search text.
+
+  searchInput.addEventListener("keyup", function () { //Runs the filter every time a key is released in the input (e.g., typing, backspace).
+    const query = this.value.toLowerCase();
+    const videos = document.querySelectorAll(".video-card"); //Selects all cards you want to show/hide.
+
+    videos.forEach(video => {
+      const title = video.querySelector("h3").innerText.toLowerCase();
+      if (title.includes(query)) { //If the title contains the search text → show the card (display: block).  
+        video.style.display = "block";
+      } else { //If not → hide it (display: none).
+        video.style.display = "none";
+      }
+    });
+  });
+
+// for cover over video
+document.querySelectorAll('.video-container').forEach(container => { //finds every .video-container on the page and runs the logic for each one.
+  const video = container.querySelector('.video'); //the <video> element (you’ve given it class .video).
+  const cover = container.querySelector('.video-cover'); //the image/overlay that sits on top of the video before hover/click.
+  const playBtn = container.querySelector('.custom-play-btn'); //the custom play button displayed over the cover.
+
+//false → we’re in preview mode (hover to autoplay muted, show cover/btn).
+//true → we’re in explicit play mode (user clicked; hide cover/btn and keep playing even if mouse leaves).
+  let clickedToPlay = false;
+
+  container.addEventListener('mouseenter', () => {
+    if (!clickedToPlay) {
+      cover.style.opacity = '0';
+      video.play();
+    }
+  });
+
+  container.addEventListener('mouseleave', () => { //if not clicked yet, fade the cover back in, pause the video, and reset to start so the next hover begins from time 0.
+    if (!clickedToPlay) {
+      cover.style.opacity = '1';
+      video.pause();
+      video.currentTime = 0;
+    }
+  });
+
+  playBtn.addEventListener('click', () => {
+    clickedToPlay = true; //Keep playing.
+    cover.style.display = 'none'; //permanently hide the cover and the button (display: none).
+    playBtn.style.display = 'none';
+    video.play();
+  });
+
+  container.addEventListener('mousemove', () => {
+    if (!clickedToPlay) {
+      playBtn.style.display = 'block'; //force the button to show.
+    }
+  });
+
+  container.addEventListener('mouseleave', () => {
+    if (!clickedToPlay) {
+      playBtn.style.display = 'none'; //hide the play button.
+    }
+  });
+});
+
+ 
+</script>
+
+</body>
+</html>

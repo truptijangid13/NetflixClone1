@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Floret – My List</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Roboto',sans-serif;background:#141414;color:#fff;overflow-x:hidden}
+
+/* ---- navbar ---- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 10px;
+}
+.navbar h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+/* ---- search box inside navbar ---- */
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #222;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+.search-container input {
+  width: 180px;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+.search-container i {
+  margin-left: 8px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.mylist-row {
+  display: flex;
+  gap: 20px;
+  padding: 20px 40px 40px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+.mylist-row::-webkit-scrollbar {height:8px}
+.mylist-row::-webkit-scrollbar-thumb {background:#444;border-radius:10px}
+
+.card {
+  position: relative;
+  min-width: 300px;
+  height: 170px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #222;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: transform .3s;
+}
+.card:hover {transform: scale(1.05)}
+.video-container {position: relative; width: 100%; height: 100%}
+.video-cover, .video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover
+}
+.video {filter: brightness(40%);opacity: 0;transition: opacity .5s}
+.card:hover .video {opacity: 1}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+  z-index: 2;
+}
+.video-actions {
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.card:hover .video-actions {opacity: 1}
+.action-btn {
+  background: rgba(0,0,0,.6);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .3s, transform .2s;
+}
+.action-btn:hover {background: rgba(229,9,20,.9); transform: scale(1.1)}
+.action-btn svg {fill: #fff}
+
+.not-found {
+  text-align: center;
+  margin-top: 100px;
+}
+.not-found h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.not-found a {
+  color: #e50914;
+  text-decoration: none;
+  font-weight: bold;
+}
+.not-found a:hover {
+  text-decoration: underline;
+}
+#sortOrder:hover {
+  background: #e50914;
+}
+
+</style>
+</head>
+
+<body>
+  
+<div class="navbar">
+  <h1>My List</h1>
+  <div style="display: flex; align-items: center; gap: 15px;">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search Titles...">
+      <i class="fa fa-search" id="searchBtn"></i>
+    </div>
+
+    <select id="browseSelect" style="padding: 6px 10px; border-radius: 20px; background: #222; color: #fff; border: none; font-size: 14px; outline: none; cursor: pointer;">
+      <option value="">Browse by Title</option>
+      <option value="asc">A-Z</option>
+      <option value="desc">Z-A</option>
+    </select>
+  </div>
+</div>
+
+</div>
+
+<div class="mylist-row" id="movieContainer">
+  <!-- CARD 1 -->
+  <div class="card" data-title="Jigra">
+    <div class="video-container">
+      <img src="JIGRA_1.jpeg" class="video-cover" alt="Jigra">
+      <video src="videos/jigra.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+           <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card" data-title="Fitoor">
+    <div class="video-container">
+      <img src="FITOOR_1.jpeg" class="video-cover" alt="Fitoor">
+      <video src="videos/Fitoor.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+              <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card" data-title="Ballerina">
+    <div class="video-container">
+      <img src="Ball_1.jpeg" class="video-cover" alt="Ballerina">
+      <video src="videos/Ballerina.mp4" class="video" muted loop></video>
+    </div>
+    <div class="card-overlay">
+      <div class="video-actions">
+             <button class="action-btn like-btn" title="Like">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+              2 6 4 4 6.5 4c1.54 0 3.04.99 3.57 2.36h.87C13.46
+              4.99 14.96 4 16.5 4 19 4 21 6 21 8.5c0 3.78-3.4
+              6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn play-btn" title="Play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+
+        <button class="action-btn wishlist-btn" title="Add to Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2
+              12.28 2 8.5 2 6 4 4 6.5 4S11 6 11 8.5
+              13.5 13 16 13s5.5-2 5.5-4.5S18 4 15.5 4
+              12 6 12 8.5V21z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const searchBtn = document.getElementById('searchBtn'); //Search bar.
+const searchInput = document.getElementById('searchInput'); //the text input where user types the movie name.
+const movieContainer = document.getElementById('movieContainer'); //the <div> that holds all your movie cards.
+const originalContent = movieContainer.innerHTML; // backup original
+
+searchBtn.addEventListener('click', function() {
+  const searchTerm = searchInput.value.trim().toLowerCase(); //get's what user typed(searchInput.value), removes extra spaces from beginning/end(.trim).
+  if (searchTerm === "") return;
+
+  const cards = Array.from(document.querySelectorAll('.card')); //converts that NodeList into a real Array, so we can use array methods like .find().
+  const matchedCard = cards.find(card => 
+    card.getAttribute('data-title').toLowerCase() === searchTerm
+  );
+
+  if (matchedCard) {
+    movieContainer.innerHTML = ''; //Clears out everything from the container (removes all cards).
+    movieContainer.appendChild(matchedCard.cloneNode(true)); //Makes a clone copy of the matched card(.cloneNode(true)), Adds the cloned card into the container(.appendChild(...)), only the searched card will show on the screen
+  } else {
+    movieContainer.innerHTML = `
+      <div class="not-found">
+        <h3>YOUR SEARCH '${searchTerm}' DID NOT FIND ANY MATCHES</h3>
+            <BR>
+        <a href="video.html">Back to Homepage</a>
+      </div>
+    `;
+  }
+});
+
+const browseSelect = document.getElementById('browseSelect');
+
+browseSelect.addEventListener('change', function() { //Runs whenever the user changes the dropdown option (e.g., selects A-Z or Z-A).
+  const value = browseSelect.value;
+  const cards = Array.from(document.querySelectorAll('.card')); //(document.querySelectorAll) gives a NodeList,not real array.
+//(Array.from(...)) converts it into a real array, so we can use .sort().
+
+  if (value === "asc" || value === "desc") {
+    // Sort cards
+    cards.sort((a, b) => {
+      const titleA = a.getAttribute('data-title').toLowerCase();
+      const titleB = b.getAttribute('data-title').toLowerCase();
+      if (titleA < titleB) return value === "asc" ? -1 : 1; //If titleA comes before titleB → return -1 (A should appear before B).
+//If titleA comes after titleB → return 1 (B should appear before A).
+      if (titleA > titleB) return value === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    // Clear and re-add sorted cards
+    movieContainer.innerHTML = ""; //Removes everything
+    cards.forEach(card => movieContainer.appendChild(card.cloneNode(true)));
+  } else {
+    // If user selects the first option (empty), reset to original
+    movieContainer.innerHTML = originalContent;
+  }
+});
+
+</script>
+
+</body>
+</html>

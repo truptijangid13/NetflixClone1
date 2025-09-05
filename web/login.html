@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Your App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+        background: url("Netflix2.jpg") no-repeat center center fixed;
+        background-size: cover; /* Ensures the background image covers the whole screen */
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+    }
+
+    .login-container {
+        background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+        padding: 40px 30px;
+        border-radius: 12px;
+        color: white;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); /* Adds depth with shadow */
+    }
+
+    .form-label {
+        position: absolute;
+        top: 50%; /* Positions the label in the middle of the input field */
+        left: 10px;
+        transform: translateY(-50%); /* Ensures proper centering */
+        font-size: 16px;
+        color: #dcdcdc;
+        transition: 0.3s ease; /* Smooth transition for label movement */
+        pointer-events: none; /* Prevents interference with clicking input */
+    }
+
+.form-group {
+position: relative;
+margin-bottom: 30px;
+}
+
+    .form-control:focus + .form-label,
+    .form-control:not(:placeholder-shown) + .form-label {
+        top: 5px; /* Moves label up when input is focused or filled */
+        font-size: 12px;
+        color: #ffffff;
+    }
+
+    .error-message {
+        color: #ff4d4d; /* Red color for error messages */
+        font-size: 14px;
+        margin-top: 5px;
+        display: none; /* Initially hidden, shown when an error occurs */
+    }
+  </style>
+</head>
+<body>
+<div class="login-container text-center">
+  <h3>Sign In</h3>
+  <form id="loginForm">
+    <div class="form-group">
+      <input type="text" id="username" class="form-control" placeholder=" " required>
+      <label for="username" class="form-label">Username</label>
+    </div>
+    <div class="form-group">
+      <input type="email" id="email" class="form-control" placeholder=" " required>
+      <label for="email" class="form-label">Email</label>
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" class="form-control" placeholder=" " required>
+      <label for="password" class="form-label">Password</label>
+      <div class="error-message" id="errorMsg">Incorrect password!</div>
+    </div>
+    <button type="submit" class="btn btn-login">Sign In</button>
+  </form>
+</div>
+ 
+<script>
+  document.getElementById("loginForm").addEventListener("submit", function(event) { //Gets the <form id="loginForm">.
+//Listens for the submit event (when user clicks "Login" button or presses Enter inside form).
+      event.preventDefault(); //Normally form submit reloads page → event.preventDefault() stops it so JS can handle login.
+
+      let passwordInput = document.getElementById("password");
+      let errorMsg = document.getElementById("errorMsg");
+
+      const fixedPassword = "Fixed@123"; // Predefined password
+
+      if (passwordInput.value !== fixedPassword) {
+          errorMsg.style.display = "block"; // Show error message
+          passwordInput.value = ""; // Clear the password field
+      } else {
+          errorMsg.style.display = "none"; // Hide error message
+          // Redirect to selectProfile.jsp after successful login
+          window.location.href = "selectProfile.jsp";
+      }
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
