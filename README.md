@@ -33,7 +33,7 @@ To run Floret locally:
 
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/truptijangid13/NetflixClone1.git
+   git clone https://github.com/truptijangid13/NetflixClone1.git 
    cd Floret
 
 2. **Open in NetBeans IDE**  
@@ -43,3 +43,26 @@ To run Floret locally:
 3. **Run the Project**  
    - Right-click the project → **Run**  
    - The app will open in your default browser 🚀
+
+## 🖼️ Screenshots  
+
+- **Profile Selection**  
+  ![Profile Selection](assets/selectProfile.png)  
+
+- **Homepage**  
+  ![Homepage](assets/homepage.png)  
+
+- **Video Player**  
+  ![Video Player](assets/videoPlayer.png)
+   ![Video Player](assets/videoPlayer2.png)
+
+- **Playlist View**  
+  ![Playlist](assets/playlist.png)  
+
+## 🛠️ Tech Stack  
+- HTML, CSS, Bootstrap, JavaScript  
+- NetBeans IDE  
+- Git / GitHub
+  
+## ⚠️ Note  
+All rights reserved. This project is for personal/final-year project purposes only. Unauthorized use, copying, or distribution of this code is not allowed.
