@@ -28,22 +28,18 @@ This project was developed using **NetBeans IDE**.
   - Sort videos by ASC, DESC, or search relevance  
 
 ---
-
 ## ⚙️ Installation / Setup  
 To run Floret locally:  
 
 1. **Clone the repo**  
    ```bash
-   git clone https://github.com/your-username/Floret.git
+   git clone https://github.com/truptijangid13/NetflixClone1.git
    cd Floret
-2.Open in NetBeans IDE
 
-  Launch NetBeans
+2. **Open in NetBeans IDE**  
+   - Launch NetBeans  
+   - Import the project folder  
 
-  Import the project folder
-
-3.Run the Project
-
-  Right-click the project → Run
-
-  The app will open in your default browser 🚀
+3. **Run the Project**  
+   - Right-click the project → **Run**  
+   - The app will open in your default browser 🚀
