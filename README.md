@@ -26,3 +26,24 @@ This project was developed using **NetBeans IDE**.
 - Playlist management:  
   - Search videos in playlist  
   - Sort videos by ASC, DESC, or search relevance  
+
+---
+
+## ⚙️ Installation / Setup  
+To run Floret locally:  
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your-username/Floret.git
+   cd Floret
+2.Open in NetBeans IDE
+
+  Launch NetBeans
+
+  Import the project folder
+
+3.Run the Project
+
+  Right-click the project → Run
+
+  The app will open in your default browser 🚀
