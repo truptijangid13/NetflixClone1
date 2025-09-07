@@ -55,6 +55,8 @@ To run Floret locally:
 
 - **Video Player**  
   ![Video Player](assets/videoPlayer.png)
+
+  
    ![Video Player](assets/videoPlayer2.png)
 
 - **Playlist View**  
@@ -80,4 +82,5 @@ Try it here: [Floret](https://truptijangid13.github.io/NetflixClone1/)
   
 ## ⚠️ Note  
 All rights reserved. This project is for personal/final-year project purposes only. Unauthorized use, copying, or distribution of this code is not allowed.
+
 
