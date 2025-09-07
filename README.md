@@ -75,8 +75,9 @@ To run Floret locally:
 - 📝 User reviews & ratings
 
 ## 🌐 Live Demo  
-Try it here: [Floret Demo](https://truptijangid13.github.io/NetflixClone1/)
+Try it here: [Floret](https://truptijangid13.github.io/NetflixClone1/)
 
   
 ## ⚠️ Note  
 All rights reserved. This project is for personal/final-year project purposes only. Unauthorized use, copying, or distribution of this code is not allowed.
+
