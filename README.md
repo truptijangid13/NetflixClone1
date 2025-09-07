@@ -43,6 +43,7 @@ To run Floret locally:
 3. **Run the Project**  
    - Right-click the project → **Run**  
    - The app will open in your default browser 🚀
+“You can also run this by simply opening index.html in any modern browser.”
 
 ## 🖼️ Screenshots  
 
@@ -63,7 +64,19 @@ To run Floret locally:
 - HTML, CSS, Bootstrap, JavaScript  
 - NetBeans IDE  
 - Git / GitHub
+
+## 🚀 Future Enhancements
+- 🔐 Add login & user authentication system
+- 📡 Backend integration with database for storing playlists, likes, and history
+- 🎯 Personalized recommendations based on watch history
+- 🌙 Dark/Light mode toggle
+- 📱 Mobile app version (React Native / Flutter)
+- 🗂️ Categories & genres for better browsing
+- 📝 User reviews & ratings
+
+## 🌐 Live Demo  
+Try it here: [Floret Demo](https://truptijangid13.github.io/NetflixClone1/)
+
   
 ## ⚠️ Note  
 All rights reserved. This project is for personal/final-year project purposes only. Unauthorized use, copying, or distribution of this code is not allowed.
-
