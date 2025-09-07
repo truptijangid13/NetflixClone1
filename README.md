@@ -34,7 +34,7 @@ To run Floret locally:
 1. **Clone the repo**  
    ```bash
    git clone https://github.com/truptijangid13/NetflixClone1.git 
-   cd Floret
+   cd NetflixClone1
 
 2. **Open in NetBeans IDE**  
    - Launch NetBeans  
@@ -66,3 +66,4 @@ To run Floret locally:
   
 ## ⚠️ Note  
 All rights reserved. This project is for personal/final-year project purposes only. Unauthorized use, copying, or distribution of this code is not allowed.
+
